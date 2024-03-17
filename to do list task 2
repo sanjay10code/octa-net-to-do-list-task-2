@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    li:last-child {
+        border-bottom: none;
+    }
+
+    .delete {
+        float: right;
+        cursor: pointer;
+    }
+
+    .delete:hover {
+        color: blue;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add New Task">
+    <ul id="taskList">
+    </ul>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+
+        taskInput.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                const taskText = taskInput.value.trim();
+                if (taskText !== "") {
+                    addTask(taskText);
+                    taskInput.value = "";
+                }
+            }
+        });
+
+        function addTask(taskText) {
+            const li = document.createElement("li");
+            li.textContent = taskText;
+            const deleteBtn = document.createElement("span");
+            deleteBtn.textContent = "❌";
+            deleteBtn.className = "delete";
+            deleteBtn.addEventListener("click", function () {
+                li.remove();
+            });
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+        }
+    });
+</script>
+
+</body>
+</html>
